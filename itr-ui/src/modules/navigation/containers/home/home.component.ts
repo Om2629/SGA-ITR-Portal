@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit{
   public isHomeOpen : boolean = true;
   public userRole : string = "";
   public panNumber : string = "";
+  public userName : string = "";
   public isItrInitiatedFlag : boolean = false;
   sessionAttributes = environment.SESSION_ATTRIBUTES;
   
@@ -35,6 +36,10 @@ export class HomeComponent implements OnInit{
   ngOnInit() {
     this.userRole = this.tokenManagerService.getItemFromSessionStorage(this.sessionAttributes.USER_ROLE);
     this.panNumber = this.tokenManagerService.getItemFromSessionStorage(this.sessionAttributes.PAN_NO);
+    this.userName = this.tokenManagerService.getItemFromSessionStorage(this.sessionAttributes.USERNAME);
+    console.log("user",this.userRole)
+    console.log("pancard",this.panNumber)
+    console.log("username",this.userName)
     this.isItrFileInitiated();
   }
 

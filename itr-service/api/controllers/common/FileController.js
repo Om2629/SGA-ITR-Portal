@@ -1,5 +1,7 @@
+const AWS = require('aws-sdk');
 const S3 = require('aws-sdk/clients/s3');
 const s3 = new S3(sails.config.S3_CONFIG);
+const sqs = new AWS.SQS(sails.config.S3_CONFIG);
 
 
 module.exports = {
@@ -29,6 +31,28 @@ module.exports = {
             });
           } else {
             console.log(data);
+            // Send message to SQS queue
+            const queueUrl = 'https://sqs.ap-south-1.amazonaws.com/781653571934/itr-file-upload.fifo'; // Replace with your SQS queue URL
+            const messageParams = {
+              MessageBody: JSON.stringify({
+                PAN: uploadedFor,
+                year: year,
+                fileName: fileName,
+                versionId: data.VersionId
+              }),
+              QueueUrl: queueUrl,
+              MessageGroupId: Date.now().toString()
+            };
+
+            sqs.sendMessage(messageParams, (err, data) => {
+              if (err) {
+                console.log(err);
+                return res.status(201).send({
+                  error: true,
+                  message: "Failed to upload file"
+                });
+              } 
+            });
             sails.log.info("File uploaded successfully");
             await Files.create({
               PAN: uploadedFor,
@@ -58,8 +82,29 @@ module.exports = {
             });
           } else {
             console.log(data);
+            const queueUrl = 'https://sqs.ap-south-1.amazonaws.com/781653571934/itr-file-upload.fifo'; // Replace with your SQS queue URL
+            const messageParams = {
+              MessageBody: JSON.stringify({
+                PAN: uploadedFor,
+                year: year,
+                fileName: fileName,
+                versionId: data.VersionId
+              }),
+              QueueUrl: queueUrl,
+              MessageGroupId: Date.now().toString()
+            };
+
+            sqs.sendMessage(messageParams, (err, data) => {
+              if (err) {
+                console.log(err);
+                return res.status(201).send({
+                  error: true,
+                  message: "Failed to upload file"
+                });
+              } 
+            });
             sails.log.info("File uploaded successfully");
-            await Files.update({ PAN: uploadedFor, year: year }).set({ status: "Complete",itrReturnedFile: fileName ,versionReturnedFile: data.VersionId });
+            await Files.update({ PAN: uploadedFor, year: year }).set({ status: "Complete", itrReturnedFile: fileName, versionReturnedFile: data.VersionId });
             return res.status(200).send({
               error: false,
               message: "File uploaded successfully"
@@ -67,10 +112,6 @@ module.exports = {
           }
         });
       }
-      
-
-      // console.log(params);
-
     } catch (error) {
       console.log(error);
       sails.log.error(error);
@@ -104,7 +145,7 @@ module.exports = {
         await Files.update({ PAN: pan, year: year }).set({ status: "In Progress" });
       }
       console.log(params);
-console.log(await s3.headObject(params).promise());
+      console.log(await s3.headObject(params).promise());
       const fileStream = await s3.getObject(params).createReadStream();
       res.set('Content-Disposition', `attachment; filename="${fileName}"`);
       res.set('Access-Control-Expose-Headers', 'Content-Disposition');

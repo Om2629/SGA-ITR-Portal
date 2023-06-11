@@ -184,3 +184,18 @@ a.article:hover {
     font-size:20px;
     font-weight:bold;
 }
+
+.sidebar-logo {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .sidebar-title {
+    font-family: 'Exo', sans-serif;
+  }
+  
+  .marquee-username {
+    font-weight: bold;
+    color: #046fa1; /* Set the desired color for the username */
+    /* Add additional styles for the username if needed */
+  }

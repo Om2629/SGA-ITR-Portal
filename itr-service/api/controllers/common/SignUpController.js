@@ -31,7 +31,6 @@ function logInfo(req, msg) {
  * `signUpController.createUser()`
  */
 async function createUser(req, userInfo) {
-  console.log("in createuser");
   try {
     await Users.create(userInfo);
   } catch (error) {
@@ -45,7 +44,6 @@ async function createUser(req, userInfo) {
 
 async function createHashedPassword(plainPassword) {
   const hashPassword = await bcrypt.hash(bcryptConfig.systemSalt + plainPassword, bcryptConfig.saltRounds);
-  console.log(hashPassword)
   return hashPassword;
 }
 
@@ -53,50 +51,39 @@ module.exports = {
 
   register: async function (req, res) {
     let body = req.body;
-    console.log(body)
     if (body && body.userInfo) {
       let userInfo = body.userInfo;
-      // let actionItem = body.action;
-
-      // if (actionItem !== permissions.CREATE) {
-      //   return res.status(200).send({
-      //     error: true,
-      //     message: 'Invalid action'
-      //   })
-      // }
       try {
         let password = userInfo['password'];
-        console.log(password)
         createHashedPassword(password).then(async (hashedPassword) => {
           console.log(hashedPassword);
           userInfo['password'] = hashedPassword;
-          console.log(userInfo);
-          // userInfo['passwordChangeRequired'] = (actionItem === permissions.CREATE) ? true : false;
-          // userInfo['isActive'] = true;
-          // if (actionItem === permissions.CREATE) {
-            // let userinfo = body.userInfo
-            // Check user existence
-            let isUserExist = await userService.checkUserExistence(userInfo.userName)
-            if (isUserExist) {
-              return res.status(200).send({
-                message: 'Username is already registered',
-                error: true
-              })
-            }
-            // Check email existence
-            let isMailExist = await userService.checkEmailExistence(userInfo.email)
-            if (isMailExist) {
-              return res.status(200).send({
-                message: 'Email address is already registered',
-                error: true
-              })
-            }
+          // Check user existence
+          let isUserExist = await userService.checkUserExistence(userInfo.userName)
+          if (isUserExist) {
+            return res.status(200).send({
+              message: 'Username is already registered',
+              error: true
+            })
+          }
+          // Check email existence
+          let isMailExist = await userService.checkEmailExistence(userInfo.email)
+          if (isMailExist) {
+            return res.status(200).send({
+              message: 'Email address is already registered',
+              error: true
+            })
+          }
 
-            // Check Role based access
-           // await roleBasedAccessService.checkAccess(businessObject.USER, permissions.CREATE, req, res);
-            // userInfo['verified'] = true;
-            // userInfo['passwordHistory'] = []
-          // }
+          // Check pan existence
+          let isPanCardExist = await userService.checkPancardExistence(userInfo.pancard)
+          if (isPanCardExist) {
+            return res.status(200).send({
+              message: 'Pancard is already registered',
+              error: true
+            })
+          }
+
           // Create user in mongodb
           await createUser(req, userInfo);
           logInfo(req, `Successfully registered user`);

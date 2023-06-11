@@ -194,6 +194,66 @@ The shell script registers a new apt repository at `/etc/apt/sources.list.d/trea
 ```
 sudo apt-get install nginx
 ```
+cd /etc/nginx
+
+copy following code to nginx.conf
+
+```
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+	include /etc/nginx/conf.d/*.conf;
+    proxy_request_buffering off;
+    client_max_body_size 100m;
+    proxy_max_temp_file_size 0;
+
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        '' close;
+    }
+
+    server {
+        listen 80;
+        server_name 3.111.190.164;
+        add_header Access-Control-Allow-Origin *;
+
+        root /opt/SGA-ITR-Portal/itr-docker-script/itr-ui/dist/itr-ui;
+        index index.html;
+
+        location / {
+        try_files $uri $uri/ /index.html;
+        }
+
+        # Backend
+        location /api {
+            rewrite /api/(.*) /$1  break;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Scheme $scheme;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_pass http://172.18.0.3:1337/;
+            proxy_redirect off;
+            proxy_request_buffering off;
+            client_max_body_size 100m;
+            proxy_max_temp_file_size 0;
+        }
+
+    }
+}
+
+```
+nginx -t
+
+sudo service nginx restart
 
 
 ## Setup UI, Service BlockListener

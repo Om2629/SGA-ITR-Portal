@@ -35,6 +35,19 @@ class UserService {
     }
   }
 
+  async checkPancardExistence(pancard) {
+    try {
+      let record = await Users.find({ pancard: pancard })
+      if (record.length != 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   async isUserExist(dbUsers, req, res, plainPassword, user) {
     if (dbUsers == null || dbUsers.length != 1) {
       sails.log.warn({
