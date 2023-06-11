@@ -1,0 +1,13 @@
+<div class="upload">
+    <div class="file-upload">
+        <div class="file-select">
+            <div class="file-select-button" id="fileName">Choose File</div>
+            <div *ngIf="fileName ==''" class="file-select-name" id="noFile">No file chosen...</div>
+            <input type="file" (change)="onFileSelected($event)"><span>      {{fileName}}</span>   
+        </div>
+    </div>
+</div>
+<div>
+    <button type="button" class="col-xs-5 btn btn-outline-info uploadbtn" (click)="upload()">Upload File</button>
+</div>
+

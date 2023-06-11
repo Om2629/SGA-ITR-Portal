@@ -1,0 +1,4 @@
+#configuration parameter
+export IOTRACE_REPO_HOME=$HOME
+export TLS_REQUIRED=false
+export CLIENT_AUTH_REQUIRED=false

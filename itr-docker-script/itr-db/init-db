@@ -1,0 +1,10 @@
+#!/bin/bash
+
+docker-compose up -d
+
+result=$?
+
+if [ "$result" -ne "0" ]; then
+  echo "Failed to initialize DB"
+  exit $result
+fi

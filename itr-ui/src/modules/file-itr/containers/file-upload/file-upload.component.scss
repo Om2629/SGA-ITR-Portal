@@ -1,0 +1,193 @@
+.file-upload {
+    display: block;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+.file-upload .file-select {
+    display: block;
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    background: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+}
+
+.file-upload .file-select .file-select-button {
+    background: #dce4ec;
+    padding: 0 10px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+
+.file-upload .file-select .file-select-name {
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.file-upload .file-select:hover {
+    border-color: #34495e;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select:hover .file-select-button {
+    background: #34495e;
+    color: #FFFFFF;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select {
+    border-color: #3fa46a;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload.active .file-select .file-select-button {
+    background: #3fa46a;
+    color: #FFFFFF;
+    transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.file-upload .file-select input[type=file] {
+    z-index: 100;
+    cursor: pointer;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.file-upload .file-select.file-select-disabled {
+    opacity: 0.65;
+}
+
+.file-upload .file-select.file-select-disabled:hover {
+    cursor: default;
+    display: block;
+    border: 2px solid #dce4ec;
+    color: #34495e;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
+    text-align: left;
+    background: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-button {
+    background: #dce4ec;
+    color: #666666;
+    padding: 0 10px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+
+.file-upload .file-select.file-select-disabled:hover .file-select-name {
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.upload {
+    width: 400px;
+    margin: 100px auto;
+    background-color: #f5f5f5;
+}
+
+//   .uploadbtn{
+//     position: fixed;
+//     // margin-left: 860px;
+//     // margin-top: -268px;
+//     bottom: 495px; /* adjust this value to change the distance from the bottom of the screen */
+//   right: 365px;
+//   }
+
+// //   @media only screen and (max-width: 768px){
+// //     .uploadbtn{
+// //         margin-left: 330px;
+// //         margin-top: -268px;
+// //       }
+
+// //       .upload { 
+// //         width: 300px; 
+// //         margin: 100px auto; 
+// //         background-color: #f5f5f5; 
+// //       }
+// //   }
+
+// @media (max-width: 600px) {
+//     /* adjust the values below to change the position of the button on smaller screens */
+//     .fixed-button {
+//       bottom: 50px;
+//       right: 50px;
+//     }
+//   }
+
+.uploadbtn {
+    display: inline-block;
+    padding: 0.5em 3em;
+    border: 0.16em solid #e8e0e0;
+    margin: -268px 0 0 910px;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #54d963;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.uploadbtn:hover {
+    color: #DDDDDD;
+    border-color: #DDDDDD;
+}
+
+.uploadbtn:active {
+    color: #d66060;
+    border-color: #ad3b3b;
+}
+
+@media all and (max-width:86.25em) {
+    .uploadbtn {
+        display: block;
+        margin: -40px auto;
+    }
+
+    .upload {
+        width: 300px;
+        margin: 100px auto;
+        background-color: #f5f5f5;
+    }
+}
+
+@media all and (min-width:86.25em) {
+    .uploadbtn {
+        display: block;
+        margin: -50px auto;
+    }
+}

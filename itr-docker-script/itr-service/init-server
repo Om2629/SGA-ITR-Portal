@@ -1,0 +1,19 @@
+#!/bin/bash
+
+[ -d "$SGA_REPO_HOME" ] || {
+    echo >&2 "configure SGA_REPO_HOME environment variable to point to root of the source repository"
+    exit 1
+}
+
+cd $SGA_REPO_HOME
+cd itr-docker-script/itr-service/
+
+docker-compose up -d
+
+result=$?
+
+if [ "$result" -ne "0" ]; then
+  echo "Failed to initialize server!"
+  exit $result
+fi
+

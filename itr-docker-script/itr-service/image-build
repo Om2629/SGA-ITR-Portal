@@ -1,0 +1,23 @@
+#!/bin/bash
+
+[ -d "$SGA_REPO_HOME" ] || {
+    echo >&2 "configure SGA_REPO_HOME environment variable to point to root of the source repository"
+    exit 1
+}
+
+cd $SGA_REPO_HOME
+
+echo "Removing server docker image..."
+docker-compose -f itr-docker-script/itr-service/docker-compose.yaml down
+docker images | awk '{ print $1,$2 }' | grep "itr-service" | awk '{print $1 }' | xargs -I {} docker rmi -f {}
+
+docker build -f itr-docker-script/itr-service/Dockerfile -t sga/itr-service:latest itr-service
+
+result=$?
+
+if [ "$result" -ne "0" ]; then
+  echo "Failed to build server image!"
+  exit $result
+fi
+
+

@@ -1,0 +1,24 @@
+version: "2.1"
+
+networks:
+  basic:
+    external: true
+
+services:
+
+  itr-db:
+    image: mongo:4.0.8
+    container_name: itr-db
+    ports:
+      - 27017:27017
+    volumes:
+      - ${PWD}/data:/data/db
+      - ./:/docker-entrypoint-initdb.d/
+    networks:
+      - basic
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "tcp://0.0.0.0:24224"
+        fluentd-async-connect: "true"
+        tag: application.itr-db

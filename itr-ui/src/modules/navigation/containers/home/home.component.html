@@ -1,0 +1,109 @@
+<div class="wrapper">
+  <!-- Sidebar  -->
+  <nav id="sidebar" [class.active]="toggle == true">
+    <div class="sidebar-header">
+      <h3>ITR Portal</h3>
+    </div>
+
+    <br>
+    <ul class="list-unstyled components">
+      <!-- <li class="active">
+        <a (click)="isHomeOpen = !isHomeOpen" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+        <ul [ngbCollapse]="isHomeOpen" class="collapse list-unstyled" id="homeSubmenu">
+          <li>
+            <a href="/table">Home 1</a>
+          </li>
+          <li>
+            <a href="#">Home 2</a>
+          </li>
+          <li>
+            <a href="#">Home 3</a>
+          </li>
+        </ul>
+      </li> -->
+      <li>
+        <a routerLink="[]" (click)="redirectToHome()">Home</a>
+      </li>
+      <li *ngIf="userRole != 'admin'">
+          <a *ngIf="!isItrInitiatedFlag" routerLink="[]" (click)="redirectToUploadFile()">File ITR</a>
+          <a *ngIf="isItrInitiatedFlag" href="javascript:void(0)" class="disabled">File ITR</a>
+        
+      </li>
+      <li>
+        <a routerLink="[]" (click)="redirectToChangePassword()">Change Password</a>
+      </li>
+      <!-- <li>
+        <a (click)="isPageOpen = !isPageOpen" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+        <ul [ngbCollapse]="isPageOpen" class="collapse list-unstyled" id="pageSubmenu">
+          <li>
+            <a href="#">Page 1</a>
+          </li>
+          <li>
+            <a href="#">Page 2</a>
+          </li>
+          <li>
+            <a href="#">Page 3</a>
+          </li>
+        </ul>
+      </li> -->
+      
+      <li>
+        <a routerLink="[]" (click)="logOut()"><i class="bi bi-power"></i>&nbsp;Log Out</a>
+      </li>
+    </ul>
+
+    <!-- <ul class="list-unstyled CTAs">
+      <li>
+        <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+      </li>
+      <li>
+        <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+      </li>
+    </ul> -->
+  </nav>
+
+  <!-- Page Content  -->
+  <div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+
+        <button type="button" id="sidebarCollapse" (click)="toggleSidebar()" class="btn btn-info">
+          <i class="bi bi-justify-left"></i>
+          <!-- <span>Toggle Sidebar</span> -->
+        </button>
+        <!-- <div class="cssmarquee">
+          <h1>Bouncing text... </h1>
+          </div> -->
+  <div class="bounce"> <marquee behavior="scroll" >Welcome to Suryakant Giri and Associates</marquee> </div>
+  <!-- <div><marquee>Note</marquee></div> -->
+          
+        <!-- <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
+          (click)="isMenuCollapse = !isMenuCollapse" aria-controls="navbarSupportedContent"
+          aria-expanded="isMenuCollapse" aria-label="Toggle navigation">
+          <i class="bi bi-justify-right"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" [ngbCollapse]="isMenuCollapse" id="navbarSupportedContent">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Page</a>
+            </li>
+          </ul>
+        </div> -->
+      </div>
+    </nav>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

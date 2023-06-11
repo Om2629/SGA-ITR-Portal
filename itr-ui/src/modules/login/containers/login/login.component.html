@@ -1,0 +1,40 @@
+<div class="login_page">
+    <div class="container">
+        <h3 class="heading">Welcome to ITR Portal </h3>
+        <div class="screen">
+            <div class="screen__content">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login">
+                    <div class="login__field required">
+                        <i class="login__icon bi bi-person-vcard"></i>
+                        <input formControlName="loginId" type="text" class="login__input" placeholder="PAN No./Mobile No." required>
+                    </div>
+                    <div class="login__field required">
+                        <i class="login__icon bi bi-key-fill"></i>
+                        <input formControlName="password" type="password" class="login__input" placeholder="Password" required>
+                    </div>
+                    <button class="button login__submit" type="submit" [disabled]="!loginForm.valid">
+                        <span class="button__text">Log In Now</span>
+                        <i class="button__icon bi bi-chevron-right"></i>
+                    </button>				
+                </form>
+                <!-- <div class="social-login">
+                    <h3>log in via</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-login__icon bi bi-instagram"></a>
+                        <a href="#" class="social-login__icon bi bi-facebook"></a>
+                        <a href="#" class="social-login__icon bi bi-twitter"></a>
+                    </div>
+                </div> -->
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>		
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>		
+        </div>
+    </div>
+</div>
+
+
+

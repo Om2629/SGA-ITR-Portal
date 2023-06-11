@@ -1,0 +1,48 @@
+#!/bin/bash
+
+[ -d "$SGA_REPO_HOME" ] || {
+    echo >&2 "configure SGA_REPO_HOME environment variable to point to root of the source repository"
+    exit 1
+}
+
+cd $SGA_REPO_HOME/itr-ui
+
+sudo rm -fr dist
+
+echo "Removing ui docker image..."
+docker-compose -f $SGA_REPO_HOME/itr-docker-script/itr-ui/docker-compose.yaml down
+docker images | awk '{ print $1,$2 }' | grep "itr-ui" | awk '{print $1 }' | xargs -I {} docker rmi -f {}
+
+# Add this configuration step for local build
+#docker run --name itr-ui-build -v $SGA_REPO_HOME/itr-ui:/opt/build -w /opt/build -it node:16.19.1-alpine sh -c "\
+#npm config set cafile=/opt/build/zscaler-root.cer && \
+#npm config set strict-ssl=false && \
+#npm config set registry=http://registry.npmjs.org/ && \
+#npm install --legacy-peer-deps && npm run-script build-prod"
+
+docker run --name itr-ui-build -v $SGA_REPO_HOME/itr-ui:/opt/build -w /opt/build -it node:18.15.0-alpine sh -c "\
+npm install --legacy-peer-deps && npm run-script build-prod"
+
+#Remove existing dist folder
+rm -rf $SGA_REPO_HOME/itr-docker-script/itr-ui/dist
+sudo chown -R ubuntu:ubuntu dist
+mv dist $SGA_REPO_HOME/itr-docker-script/itr-ui/
+
+cd $SGA_REPO_HOME/itr-docker-script/itr-ui
+
+docker build --build-arg NGINX_VERSION=1.23.3 --build-arg HEADER_MODULE_VERSION=0.34 -f ./Dockerfile -t sga/itr-ui .
+
+[ $(docker ps -af name=itr-ui-build|wc -l) -eq 2 ] && {
+docker rm itr-ui-build
+if [ $? -ne 0 ]; then
+  echo 2> "Failed to remove existing itr-ui-build container.  Please try after some time."
+  exit 1
+fi
+}
+
+result=$?
+
+if [ "$result" -ne "0" ]; then
+  echo "Failed to initialize application"
+  exit $result
+fi

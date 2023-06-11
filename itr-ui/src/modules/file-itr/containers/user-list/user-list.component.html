@@ -1,0 +1,73 @@
+<div class="news">
+    <span>Notification</span><span class="text1">
+        <marquee class="marquee">The ITR filing due date for FY 2022-23 (AY 2023-24) is 31st July 2023. Avoid paying penalty later and
+            file your return on time</marquee>
+    </span>
+</div>
+
+<div class="body">
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <th class="text-left">Name</th>
+                <th class="text-left">Pan Number</th>
+                <th class="text-left">Email</th>
+                <th class="text-left">Mobile Number</th>
+                <th class="text-left">Year</th>
+                <th class="text-left">Form 16</th>
+                <th class="text-left">ITR File</th>
+                <th class="text-left">Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            <tr *ngFor="let users of userList">
+                <td class="text-left">{{users.userName}}</td>
+                <td class="text-left">{{users.pancard}}</td>
+                <td class="text-left">{{users.email}}</td>
+                <td class="text-left">{{users.mobileNumber}}</td>
+                <td class="text-left">{{users.year}}</td>
+                <td class="text-left"><a [routerLink]="[]"
+                        (click)="downloadFile(users.pancard, users.year, users.form16File)">{{users.form16File}}</a>
+                </td>
+                <td class="text-left"><span
+                        *ngIf="users.itrReturnedFile != ''; else elseBlock">{{users.itrReturnedFile}}</span>
+                    <ng-template #elseBlock>Not Available</ng-template>
+                </td>
+                <td class="text-left"><button [ngClass]="displayStatus(users.status)"
+                        [disabled]="true">{{users.status}}</button></td>
+                <td class="text-left"><button [disabled]="users.itrStatusFlag"
+                        (click)="redirectToFileUpload(users.pancard)" class="btn btn-sm btn-outline-info button">Upload
+                        ITR File</button></td>
+            </tr>
+            <!-- <tr>
+                <td class="text-left">January</td>
+                <td class="text-left">$ 50,000.00</td>
+                <td class="text-left">$ 50,000.00</td>
+                <td class="text-left">Mobile Number</td>
+                <td class="text-left">Year</td>
+                <td class="text-left">Form 16</td>
+                <td class="text-left">ITR File</td>
+                <td class="text-left">Status</td>
+            </tr>
+            <tr>
+                <td class="text-left">February</td>
+                <td class="text-left">$ 10,000.00</td>
+            </tr>
+            <tr>
+                <td class="text-left">March</td>
+                <td class="text-left">$ 85,000.00</td>
+            </tr>
+            <tr>
+                <td class="text-left">April</td>
+                <td class="text-left">$ 56,000.00</td>
+            </tr>
+            <tr>
+                <td class="text-left">May</td>
+                <td class="text-left">$ 98,000.00</td>
+            </tr> -->
+        </tbody>
+    </table>
+
+</div>
+<app-footer></app-footer>

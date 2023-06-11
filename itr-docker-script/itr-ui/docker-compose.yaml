@@ -1,0 +1,24 @@
+version: '2'
+
+networks:
+  basic:
+    external: true
+
+services:
+  iotrace-ui:
+    image: sga/itr-ui
+    container_name: itr-ui
+    volumes:
+      - ./nginx-itr/nginx.conf:/etc/nginx/nginx.conf:ro
+    #  - ../ssl-certs:/ssl-certs
+    ports:
+      - "12443:8080"
+    command: [nginx, '-g', 'daemon off;']
+    networks:
+      - basic
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "tcp://0.0.0.0:24224"
+        fluentd-async-connect: "true"
+        tag: application.itr-ui

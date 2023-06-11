@@ -1,0 +1,127 @@
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // background: #111;
+    height: auto;
+    // width: 100vw;
+    padding-top: 40px;
+    color: #fff;
+    // overflow-y: auto;
+}
+
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: right;
+}
+
+.socials{
+    list-style: none;
+    display: flex;
+    position: absolute;
+  bottom: 0;
+  right: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 5rem 5rem 0;
+}
+.socials li{
+    margin: 0 10px;
+}
+.socials a{
+    text-decoration: none;
+    color: #0e0e0e;
+    border: 1.1px solid rgb(19, 19, 19);
+    padding: 5px;
+    border-radius: 50%;
+}
+.socials a i{
+    font-size: 15px;
+    width: 15px;
+    transition: color .4s ease;
+}
+.socials a:hover i{
+    color: aqua;
+}
+
+.footer-bottom{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 1rem 5rem 2rem 0;
+}
+
+.footer-bottom p{
+    float: left;
+    font-size: 10px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+    
+ }
+ .footer-bottom p a{
+   color:#44bae8;
+   font-size: 12px;
+   text-decoration: none;
+   bottom: 0;
+    right: 0;
+ }
+ .footer-bottom span{
+     text-transform: uppercase;
+     opacity: .4;
+     font-weight: 200;
+ }
+
+// .container {
+//     position: relative;
+//     min-height: 100vh; /* Ensure the container expands to full height */
+//   }
+  
+//   footer {
+//     position: absolute;
+//     bottom: 0;
+//     right: 0;
+//     left: 0;
+//     padding: 10px;
+//     // background-color: #f2f2f2;
+//     text-align: right;
+//   }
+  
+//   .social-icons {
+//     display: inline-block;
+//   }
+  
+//   .social-icons a {
+//     display: inline-block;
+//     margin-left: 5px;
+//   }
+  
+//   .social-icons img {
+//     width: 20px;
+//     height: 20px;
+//   }
+  
+//   .copyright {
+//     display: inline-block;
+//     margin-left: 10px;
+//     font-size: 12px;
+//     color: #888;
+//   }
+  
+@media screen and (max-width: 450px) {
+    .footer-bottom{
+        margin-right: 103px;
+    }
+
+    .socials{
+        margin-right: 95px;
+    }
+
+    footer{
+        height: -150px;
+    }
+}
+  
