@@ -6,7 +6,7 @@ const protocol = window.location.protocol;
 
 export const environment = {
   production: false,
-  API_ENDPOINT: protocol + "//" + window.location.hostname + ":1337/",
+  API_ENDPOINT: window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/api/",
   UI_ENDPOINT: protocol + "//" + window.location.hostname + ":4200/",
 
   TOKEN_DECIMALS: 6,
