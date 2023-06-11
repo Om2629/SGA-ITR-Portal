@@ -9,10 +9,11 @@ import { LoginComponent } from './containers/login/login.component';
 // import { MatIconModule } from '@angular/material/icon';
 // import { MatDividerModule } from '@angular/material/divider';
 import { LoginService } from './services/login.service';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     LoginRoutingModule,

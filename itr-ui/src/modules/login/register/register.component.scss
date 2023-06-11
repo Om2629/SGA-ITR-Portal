@@ -1,0 +1,50 @@
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .registration-form div {
+    margin-bottom: 15px;
+  }
+  
+  .registration-form label {
+    font-weight: bold;
+  }
+  
+  .registration-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .registration-form .submit-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+  
+  .user-detail {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .user-detail h2 {
+    margin-bottom: 10px;
+  }
+  
+  .user-detail p {
+    margin-bottom: 5px;
+  }
+  
+  .user-detail strong {
+    font-weight: bold;
+  }
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  

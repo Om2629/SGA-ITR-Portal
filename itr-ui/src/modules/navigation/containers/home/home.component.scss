@@ -199,3 +199,14 @@ a.article:hover {
     color: #046fa1; /* Set the desired color for the username */
     /* Add additional styles for the username if needed */
   }
+
+  .logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo-container img {
+  max-width: 200px;
+  height: auto;
+}
