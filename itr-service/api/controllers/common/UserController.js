@@ -95,7 +95,6 @@ module.exports = {
                 let password = userInfo.currentPassword;
                 let newPassword = userInfo.newPassword;
                 let confirmNewPassword = userInfo.confirmNewPassword;
-// console.log(tokenInfo.data.panNumber);
                 Users.find({ pancard: tokenInfo.data.pan })
                     .exec(function (err, dbUsers) {
                         if (err) {
@@ -141,6 +140,29 @@ module.exports = {
             sails.log.error(req, `Failed to change password: ${error}`);
             return res.serverError(error);
         }
+    },
+    totalClientandItrFileCount: async function (req, res) {
+        try {
+            const totalClients = await Users.count({ role: 'client' });
+            const completeFileCount = await Files.count({ status: 'Complete' });
+            const newFileCount = await Files.count({ status: 'New' });
+
+            return res.ok({ totalClients, completeFileCount, newFileCount });
+        } catch (err) {
+            return res.serverError(err);
+        }
+    },
+    fetchClientProfile: async function (req, res) {
+        try {
+            console.log("inside client profile")
+            const userDetails = await Users.find({ userName: req.body.user });
+            let userDetail = userDetails[0]
+            console.log(userDetail)
+            return res.ok(userDetail);
+        } catch (err) {
+            return res.serverError(err);
+        }
     }
+
 };
 

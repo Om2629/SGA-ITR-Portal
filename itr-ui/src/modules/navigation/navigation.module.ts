@@ -14,11 +14,13 @@ import { HomeComponent } from './containers/home/home.component';
 import { ChangePasswordComponent } from './containers/change-password/change-password.component';
 import { AppCommonModule } from '@modules/app-common/app-common.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './containers/dashboard/dashboard.component';
+import { ProfileComponent } from './containers/profile/profile.component';
 
 
 @NgModule({
   declarations: [NavigationComponent,
-  HomeComponent, ChangePasswordComponent],
+  HomeComponent, ChangePasswordComponent, DashboardComponent, ProfileComponent],
   imports: [
     CommonModule,
     NavigationRoutingModule,

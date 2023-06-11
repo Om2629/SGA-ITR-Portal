@@ -43,6 +43,8 @@ module.exports.routes = {
   'post /checkStatus': 'common/UserController.checkItrStatus',
   'post /checkItrHistory': 'common/UserController.fetchItrHistory',
   'post /changePassword': 'common/UserController.changeLoginPassword',
+  'get /users/totalClientandItrFileCount': 'common/UserController.totalClientandItrFileCount',
+  'post /users/fetchClientProfile':'common/UserController.fetchClientProfile',
   /***************************************************************************
   *                  File Controller                                                        *                                                  *                                                                        *
   ***************************************************************************/

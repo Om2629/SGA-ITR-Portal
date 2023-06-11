@@ -22,6 +22,12 @@
         </ul>
       </li> -->
       <li>
+        <a routerLink="[]" (click)="redirectToProfile()">Profile</a>
+      </li>
+      <li *ngIf="userRole == 'admin'">
+        <a routerLink="[]" (click)="redirectToDashborad()">Dashboard</a>
+      </li>
+      <li>
         <a routerLink="[]" (click)="redirectToHome()">Home</a>
       </li>
       <li *ngIf="userRole != 'admin'">

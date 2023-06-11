@@ -37,9 +37,6 @@ export class HomeComponent implements OnInit{
     this.userRole = this.tokenManagerService.getItemFromSessionStorage(this.sessionAttributes.USER_ROLE);
     this.panNumber = this.tokenManagerService.getItemFromSessionStorage(this.sessionAttributes.PAN_NO);
     this.userName = this.tokenManagerService.getItemFromSessionStorage(this.sessionAttributes.USERNAME);
-    console.log("user",this.userRole)
-    console.log("pancard",this.panNumber)
-    console.log("username",this.userName)
     this.isItrFileInitiated();
   }
 
@@ -103,6 +100,17 @@ export class HomeComponent implements OnInit{
   }
  }
 
+ redirectToDashborad(){
+  if(this.userRole == "admin"){
+    this.router.navigate(["/dashboard"]);
+  }else{
+    this.router.navigate(["/file-itr/table"]);
+  }
+ }
+
+ redirectToProfile(){
+  this.router.navigate(["/profile"]);
+ }
  redirectToUploadFile(){
   this.router.navigate(["/file-itr/upload-file"]);
  }
