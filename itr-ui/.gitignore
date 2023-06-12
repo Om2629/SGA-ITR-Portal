@@ -41,5 +41,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/itr-ui/src/assets/*
-!/itr-ui/src/assets/.gitkeep
+itr-ui/src/assets/*
+!itr-ui/src/assets/.gitkeep
