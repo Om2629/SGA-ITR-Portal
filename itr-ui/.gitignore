@@ -40,3 +40,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+/itr-ui/src/assets/*
+!/itr-ui/src/assets/.gitkeep
